@@ -17,6 +17,17 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/test-koneksi-database', function() {
+	try {
+		\DB::connection()->getPdo();
+
+		echo 'Sudah terkoneksi dengan database: ' . \DB::connection()->getDatabaseName();
+
+	} catch (\Exception $e) {
+		echo 'Belum terkoneksi database, error: ' . $e->getMessage();
+	}
+});
+
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
